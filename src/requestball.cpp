@@ -197,8 +197,17 @@ void RequestBall::formatRequestDetail(LogEntry* le, std::vector<std::string>& co
         std::string value;
         le->getValue(field, value);
 
+        std::string overflow_padding(title.size() + 1, ' ');
+
+        // TextArea::setText throws away characters after the first 100.
+        unsigned int max_value_length = 100 - overflow_padding.size();
+
         if(!value.empty()) {
-            content.push_back( title + std::string(" ") + value);
+            content.push_back(title + std::string(" ") + value.substr(0, max_value_length));
+
+            for(unsigned int i = max_value_length; i < value.length(); i += max_value_length) {
+                content.push_back(overflow_padding + value.substr(i, max_value_length));
+            }
         }
     }
 }
