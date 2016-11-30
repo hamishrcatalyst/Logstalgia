@@ -27,6 +27,18 @@ mingw {
     LIBS += -lcomdlg32
 }
 
+linux {
+    INCLUDEPATH += src/FileWatcher
+
+    INCLUDEPATH += /usr/include/GL        \
+                   /usr/include/SDL2      \
+                   /usr/include/libpng12  \
+                   /usr/include/freetype2 \
+                   /usr/include
+
+    LIBS += -lGL -lGLU -lfreetype -lpcre -lGLEW -lGLU -lGL -lSDL2_image -lSDL2 -lpng12
+}
+
 VPATH += ./src
 
 SOURCES += custom.cpp \
